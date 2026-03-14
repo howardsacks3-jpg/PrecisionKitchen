@@ -52,3 +52,18 @@ let cost=document.getElementById("country").value
 document.getElementById("shippingResult").innerText="Shipping cost: $"+cost
 
 }
+function searchProducts(){
+
+let input=document.getElementById("search").value.toLowerCase()
+
+let products=document.querySelectorAll(".product")
+
+products.forEach(p=>{
+
+let name=p.innerText.toLowerCase()
+
+p.style.display=name.includes(input) ? "block" : "none"
+
+})
+
+}
