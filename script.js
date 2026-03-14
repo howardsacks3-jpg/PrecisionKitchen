@@ -112,7 +112,37 @@ Add to Cart
 </button>
 
 </div>
+fetch("products.json")
 
+.then(response => response.json())
+
+.then(data => {
+
+let container = document.getElementById("product-grid")
+
+data.products.forEach(p => {
+
+container.innerHTML += `
+
+<div class="product">
+
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<p>$${p.price}</p>
+
+<button onclick="location.href='checkout.html'">
+Buy Now
+</button>
+
+</div>
+
+`
+
+})
+
+})
 `
 
 })
