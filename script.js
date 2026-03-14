@@ -148,5 +148,20 @@ Buy Now
 })
 
 })
-`
+`.product{
+
+background:white;
+padding:20px;
+border-radius:10px;
+transition:0.3s;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+}
+
+.product:hover{
+
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,0,0,0.2);
+
+}
 
