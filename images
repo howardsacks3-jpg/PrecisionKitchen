@@ -1,3 +1,19 @@
-scale.jpg
+scale.jpg{
+ "products":[
+  {
+   "name":"Smart Nutrition Kitchen Scale",
+   "price":34.99,
+   "image":"images/scale.jpg",
+   "description":"Track calories and nutrition instantly."
+  },
+  {
+   "name":"Oil Spray Bottle",
+   "price":19.99,
+   "image":"images/oil.jpg",
+   "description":"Healthy cooking oil control."
+  }
+ ]
+}
+
 oil.jpg
 spoon.jpg
