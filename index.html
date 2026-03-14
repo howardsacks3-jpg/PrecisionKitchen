@@ -1,116 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PrecisionKitchen™ | Premium Kitchen Tools</title>
+
+<meta name="description" content="Professional smart kitchen tools including nutrition scales, oil sprayers and precision cooking gadgets.">
+
 <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
 
 <header>
-<div class="nav">
 
-<h1>PrecisionKitchen™</h1>
+<div class="logo">PrecisionKitchen™</div>
 
 <nav>
-<a href="#">Home</a>
-<a href="#products">Products</a>
-<a href="#shipping">Shipping</a>
-<button id="cartButton">🛒 Cart (<span id="cartCount">0</span>)</button>
+
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+<a href="contact.html">Contact</a>
+
 </nav>
 
+<div class="cart-icon">
+🛒 <span id="cart-count">0</span>
 </div>
+
 </header>
 
 <section class="hero">
 
-<div class="hero-text">
-<h2>Cook With Precision</h2>
-<p>Professional tools for modern kitchens.</p>
-<a class="cta" href="#products">Shop Now</a>
-</div>
+<h1>Cook With Precision</h1>
 
-<img class="hero-img"
-src="https://images.unsplash.com/photo-1584990347449-1f0a1e67f3c8">
+<p>Professional tools for modern kitchens</p>
+
+<a href="shop.html" class="cta">Shop Collection</a>
 
 </section>
-<input 
-type="text" 
-id="search"
-placeholder="Search products..."
-onkeyup="searchProducts()">
-<section id="products" class="products">
 
-<h2>Our Products</h2>
+<section class="features">
 
-<div class="grid">
+<div>🔒 Secure Checkout</div>
+<div>🚚 Global Shipping</div>
+<div>💳 PayPal Protection</div>
+<div>⭐ 30-Day Guarantee</div>
+
+</section>
+
+<section class="products">
+
+<h2>Best Sellers</h2>
+
+<div class="product-grid">
 
 <div class="product">
-<img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff">
+
+<img src="images/scale.jpg">
+
 <h3>Smart Nutrition Scale</h3>
+
 <p>$34.99</p>
+
 <button onclick="addToCart('Scale',34.99)">Add to Cart</button>
+
 </div>
 
 <div class="product">
-<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
+
+<img src="images/oil.jpg">
+
 <h3>Oil Spray Bottle</h3>
+
 <p>$19.99</p>
-<button onclick="addToCart('Oil Spray',19.99)">Add to Cart</button>
+
+<button onclick="addToCart('Oil Sprayer',19.99)">Add to Cart</button>
+
 </div>
 
 <div class="product">
-<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
+
+<img src="images/spoon.jpg">
+
 <h3>Adjustable Measuring Spoon</h3>
+
 <p>$14.99</p>
-<button onclick="addToCart('Spoon',14.99)">Add to Cart</button>
+
+<button onclick="addToCart('Measuring Spoon',14.99)">Add to Cart</button>
+
 </div>
 
 </div>
 
 </section>
-
-<section class="trust">
-
-<img src="https://img.icons8.com/color/96/lock.png">
-<img src="https://img.icons8.com/color/96/paypal.png">
-<img src="https://img.icons8.com/color/96/guarantee.png">
-
-<p>Secure checkout • PayPal buyer protection • 30-day money back guarantee</p>
-
-</section>
-
-<section id="shipping" class="shipping">
-
-<h2>Shipping Calculator</h2>
-
-<select id="country">
-<option value="5">USA - $5</option>
-<option value="7">Europe - $7</option>
-<option value="9">International - $9</option>
-</select>
-
-<button onclick="calculateShipping()">Calculate</button>
-
-<p id="shippingResult"></p>
-
-</section>
-
-<div id="cart" class="cart">
-
-<h2>Your Cart</h2>
-
-<div id="cartItems"></div>
-
-<p>Total: $<span id="cartTotal">0</span></p>
-
-<div id="paypal-button-container"></div>
-
-<button onclick="closeCart()">Close</button>
-
-</div>
 
 <footer>
 
@@ -119,44 +105,6 @@ onkeyup="searchProducts()">
 </footer>
 
 <script src="script.js"></script>
-
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
-
-<script>
-
-paypal.Buttons({
-
-createOrder: function(data, actions) {
-
-return actions.order.create({
-
-purchase_units: [{
-
-amount: {
-
-value: document.getElementById('cartTotal').innerText
-
-}
-
-}]
-
-});
-
-},
-
-onApprove: function(data, actions) {
-
-return actions.order.capture().then(function(details) {
-
-alert('Payment completed by ' + details.payer.name.given_name);
-
-});
-
-}
-
-}).render('#paypal-button-container');
-
-</script>
 
 </body>
 </html>
