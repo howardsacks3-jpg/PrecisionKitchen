@@ -112,5 +112,38 @@ text-align:center;
 padding:30px;
 background:#111;
 color:white;
+.product-hero{
 
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+padding:80px;
+
+}
+
+.buy-now{
+
+background:#ff3b00;
+color:white;
+padding:18px 40px;
+font-size:18px;
+border:none;
+border-radius:8px;
+
+}
+
+.urgency{
+
+color:red;
+font-weight:bold;
+margin-top:10px;
+
+}
+
+.reviews{
+
+margin-top:10px;
+color:#555;
+
+}
 }
