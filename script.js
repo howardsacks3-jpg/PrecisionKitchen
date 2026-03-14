@@ -1,21 +1,54 @@
-let cart = [];
+let cart=[]
+let total=0
 
-function addToCart(product, price) {
-  cart.push({ product, price });
-  updateCart();
+function addToCart(name,price){
+
+cart.push({name,price})
+
+total+=price
+
+updateCart()
+
+openCart()
+
 }
 
-function updateCart() {
-  const cartList = document.getElementById("cart-items");
-  cartList.innerHTML = "";
+function updateCart(){
 
-  let total = 0;
-  cart.forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = item.product + " - $" + item.price.toFixed(2);
-    cartList.appendChild(li);
-    total += item.price;
-  });
+document.getElementById("cartCount").innerText=cart.length
 
-  document.getElementById("cart-total").innerText = total.toFixed(2);
+document.getElementById("cartTotal").innerText=total.toFixed(2)
+
+let items=""
+
+cart.forEach(item=>{
+
+items+=`<p>${item.name} - $${item.price}</p>`
+
+})
+
+document.getElementById("cartItems").innerHTML=items
+
+}
+
+function openCart(){
+
+document.getElementById("cart").classList.add("open")
+
+}
+
+function closeCart(){
+
+document.getElementById("cart").classList.remove("open")
+
+}
+
+document.getElementById("cartButton").onclick=openCart
+
+function calculateShipping(){
+
+let cost=document.getElementById("country").value
+
+document.getElementById("shippingResult").innerText="Shipping cost: $"+cost
+
 }
