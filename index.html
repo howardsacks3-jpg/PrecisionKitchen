@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF‑8">
+<meta name="viewport" content="width=device‑width, initial-scale=1.0">
 <title>PrecisionKitchen™ – Premium Kitchen Tools</title>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,47 +15,70 @@
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="contact.html">Contact</a>
+      <button id="cart-toggle">🛒 Cart (<span id="cart-count">0</span>)</button>
     </nav>
   </div>
 </header>
 
-<main>
-  <section class="hero">
-    <h2>Premium Kitchen Tools for Smart Cooking</h2>
-    <p>High-quality tools to make your cooking precise, fast, and fun!</p>
-    <a href="products.html" class="btn-primary">Shop Now</a>
-  </section>
+<section class="hero">
+  <div class="hero-content">
+    <h2>Cook Smarter, Not Harder</h2>
+    <p>Premium kitchen tools to make your cooking precise and effortless.</p>
+    <a href="products.html" class="btn-primary">Shop All Products</a>
+  </div>
+  <img src="https://pixabay.com/get/gf31a94ba4429222de6e8436d9c1da89a86e9d285557503f9a22d90da8c5588d7a11a527329d4a2b98cdc45286800f373_1280.jpg" alt="Kitchen Scale" class="hero-img">
+</section>
 
-  <section class="featured-products">
-    <h2>Our Featured Products</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="images/scale.jpg" alt="Smart Nutrition Scale">
-        <h3>Smart Nutrition Scale</h3>
-        <p class="price">$34.99</p>
-        <a href="product-scale.html" class="btn-secondary">View</a>
-      </div>
-
-      <div class="product-card">
-        <img src="images/oil-spray.jpg" alt="Oil Spray Bottle">
-        <h3>Oil Spray Bottle</h3>
-        <p class="price">$19.99</p>
-        <a href="products.html" class="btn-secondary">View</a>
-      </div>
-
-      <div class="product-card">
-        <img src="images/spoon.jpg" alt="Adjustable Measuring Spoon">
-        <h3>Adjustable Measuring Spoon</h3>
-        <p class="price">$14.99</p>
-        <a href="products.html" class="btn-secondary">View</a>
-      </div>
+<section class="featured-products">
+  <h2>Featured Picks</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="https://pixabay.com/get/gf31a94ba4429222de6e8436d9c1da89a86e9d285557503f9a22d90da8c5588d7a11a527329d4a2b98cdc45286800f373_640.jpg" alt="Smart Nutrition Scale">
+      <h3>Smart Nutrition Scale</h3>
+      <p class="price">$34.99</p>
+      <button onclick="addToCart('Smart Nutrition Scale',34.99)">Add to Cart</button>
     </div>
-  </section>
-</main>
 
-<footer>
-  <p>&copy; 2026 PrecisionKitchen™ | Designed for professional cooking enthusiasts</p>
-</footer>
+    <div class="product-card">
+      <img src="https://images.pexels.com/photos/7932733/pexels-photo-7932733.jpeg" alt="Adjustable Measuring Spoon">
+      <h3>Adjustable Measuring Spoon</h3>
+      <p class="price">$14.99</p>
+      <button onclick="addToCart('Adjustable Measuring Spoon',14.99)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.pexels.com/photos/7932733/pexels-photo-7932733.jpeg" alt="Oil Spray Bottle">
+      <h3>Oil Spray Bottle</h3>
+      <p class="price">$19.99</p>
+      <button onclick="addToCart('Oil Spray Bottle',19.99)">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+<section class="trust-badges">
+  <img src="images/secure-checkout.png" alt="Secure Checkout">
+  <img src="images/paypal-verified.png" alt="PayPal Verified">
+  <img src="images/money-back.png" alt="30‑Day Guarantee">
+</section>
+
+<script src="script.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+<script>
+paypal.Buttons({
+  createOrder(data, actions) {
+    const total = document.getElementById("cart‑total").innerText;
+    return actions.order.create({purchase_units:[{amount:{value:total}}]});
+  },
+  onApprove(data, actions) {
+    return actions.order.capture().then(details => {
+      alert("Payment completed – thanks " + details.payer.name.given_name);
+      cart = [];
+      updateCart();
+      closeCart();
+    });
+  }
+}).render('#paypal-button-container');
+</script>
 
 </body>
 </html>
