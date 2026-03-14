@@ -67,3 +67,56 @@ p.style.display=name.includes(input) ? "block" : "none"
 })
 
 }
+fetch("products.json")
+.then(res=>res.json())
+.then(data=>{
+
+let container=document.getElementById("product-list")
+
+data.products.forEach(p=>{
+
+container.innerHTML+=`
+
+<div class="product">
+
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<p>$${p.price}</p>
+
+<button onclick="addToCart('${p.name}',${p.price})">
+Add to Cart
+</button>
+</div>)
+fetch("products.json")
+.then(res=>res.json())
+.then(data=>{
+
+let container=document.getElementById("product-list")
+
+data.products.forEach(p=>{
+
+container.innerHTML+=`
+
+<div class="product">
+
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<p>$${p.price}</p>
+
+<button onclick="addToCart('${p.name}',${p.price})">
+Add to Cart
+</button>
+
+</div>
+
+`
+
+})
+
+})
+`
+
