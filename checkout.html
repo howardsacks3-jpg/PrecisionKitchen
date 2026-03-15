@@ -1,3 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | PrecisionKitchen™</title>
+<link rel="stylesheet" href="css/styles.css">
 <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+</head>
+<body>
+<header>
+  <a href="cart.html">Back to Cart</a>
+</header>
 
-<div id="paypal-button-container"></div>
+<main>
+  <h2>Checkout</h2>
+  <p id="checkout-total"></p>
+  <div id="paypal-button-container"></div>
+</main>
+
+<script src="js/cart.js"></script>
+<script>
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0).toFixed(2);
+document.getElementById("checkout-total").textContent = "Order Total: $" + total;
+
+// PayPal button
+if(window.paypal){
+  paypal.Buttons({
+    createOrder: (data, actions) => actions.order.create({
+      purchase_units: [{ amount: { value: total } }]
+    }),
+    onApprove: (data, actions) => actions.order.capture().then(details => {
+      alert('Payment completed by ' + details.payer.name.given_name);
+      localStorage.removeItem("cart");
+      window.location.href = "thankyou.html";
+    }),
+    onError: err => alert("Payment error. Please try again.")
+  }).render("#paypal-button-container");
+}
+
+// Optional local payment fallback
+function localPayment(){
+  alert("Payment successful (local simulation).");
+  localStorage.removeItem("cart");
+  window.location.href = "thankyou.html";
+}
+</script>
+</body>
+</html>
