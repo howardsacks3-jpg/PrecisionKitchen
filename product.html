@@ -1,41 +1,65 @@
-<section class="product-hero">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Nutrition Scale | PrecisionKitchen</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-<img src="images/scale.jpg">
+<header>
+  <h1>PrecisionKitchen™</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart (<span class="cart-count">0</span>)</a>
+  </nav>
+</header>
 
-<div class="product-info">
+<section class="product-page">
+  <img src="images/scale.jpg" width="400" alt="Smart Nutrition Kitchen Scale">
 
-<h1>Smart Nutrition Kitchen Scale</h1>
+  <div class="product-info">
+    <h2>Smart Nutrition Kitchen Scale</h2>
+    <p class="price">$34.99</p>
+    <p>Track calories, protein, fat and nutrients instantly. Perfect for healthy cooking, meal prep and dieting.</p>
 
-<p class="price">$34.99</p>
+    <div class="reviews">⭐⭐⭐⭐⭐ 1,284 Verified Reviews</div>
+    <div class="urgency">⚡ Only 17 left in stock</div>
 
-<p class="benefit">
-Track calories, protein and nutrients instantly.
-Perfect for healthy cooking and meal prep.
-</p>
-
-<button class="buy-now">
-Buy Now
-</button>
-
-<div class="urgency">
-⚡ Only 17 units left
-</div>
-
-<div class="reviews">
-⭐⭐⭐⭐⭐ 1,284 verified reviews
-</div>
-
-</div>
-
+    <!-- Fixed Add to Cart button -->
+    <button id="addToCartBtn">Add to Cart</button>
+  </div>
 </section>
-<div class="sticky-cart">
 
-<button id="stickyAdd">
-<div id="product-grid"></div><script src="js/cart.js"></script>
-<script src="js/product-page.js"></script>
-  
-Add To Cart
+<section class="trust">
+  <div>🔒 Secure Checkout</div>
+  <div>💳 PayPal Buyer Protection</div>
+  <div>🚚 Fast Worldwide Shipping</div>
+  <div>⭐ 30-Day Money Back Guarantee</div>
+</section>
 
-</button>
+<footer>
+  <p>© 2026 PrecisionKitchen™</p>
+</footer>
 
-</div>
+<!-- Scripts -->
+<script src="js/cart.js"></script>
+<script>
+  // Create a product object matching your products.json
+  const product = {
+    id: 1,
+    name: "Smart Nutrition Kitchen Scale",
+    price: 34.99,
+    image: "images/scale.jpg"
+  };
+
+  // Hook up the Add to Cart button
+  document.getElementById("addToCartBtn").addEventListener("click", () => {
+    addToCart(product); // calls cart.js function
+  });
+</script>
+
+</body>
+</html>
