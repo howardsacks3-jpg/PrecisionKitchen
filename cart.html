@@ -1,31 +1,80 @@
-<div id="paypal-button-container"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrecisionKitchen™ | Cart</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
 
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+<header>
+  <h1>PrecisionKitchen™</h1>
+  <a href="products.html">Continue Shopping</a>
+</header>
 
+<main>
+  <h2>Your Cart</h2>
+  <div id="cart-items"></div>
+  <h3 id="cart-total">Total: $0.00</h3>
+  <a href="checkout.html" id="checkout-button">Proceed to Checkout</a>
+</main>
+
+<script src="js/cart.js"></script>
 <script>
-paypal.Buttons({
+  function renderCart() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const container = document.getElementById("cart-items");
+    let total = 0;
 
-createOrder:function(data,actions){
+    if (cart.length === 0) {
+      container.innerHTML = '<p>Your cart is empty.</p>';
+      document.getElementById("cart-total").textContent = "Total: $0.00";
+      return;
+    }
 
-return actions.order.create({
+    container.innerHTML = cart.map(item => {
+      const subtotal = item.price * item.qty;
+      total += subtotal;
+      return `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}" width="100">
+          <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            <p>$${item.price} × ${item.qty} = $${subtotal.toFixed(2)}</p>
+            <button onclick="updateQuantity(${item.id}, -1)">-</button>
+            <button onclick="updateQuantity(${item.id}, 1)">+</button>
+            <button onclick="removeFromCart(${item.id})">Remove</button>
+          </div>
+        </div>
+      `;
+    }).join('');
 
-purchase_units:[{
-amount:{value:cartTotal}
-}]
+    document.getElementById("cart-total").textContent = "Total: $" + total.toFixed(2);
+  }
 
-})
+  function updateQuantity(id, delta) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
 
-},
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
 
-onApprove:function(data,actions){
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
 
-return actions.order.capture().then(function(details){
+  function removeFromCart(id) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.filter(i => i.id !== id);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
 
-alert("Payment completed by "+details.payer.name.given_name)
-
-})
-
-}
-
-}).render('#paypal-button-container');
+  // Initialize
+  renderCart();
 </script>
+
+</body>
+</html>
