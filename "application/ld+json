@@ -1,0 +1,13 @@
+{
+"@context":"https://schema.org",
+"@type":"Product",
+"name":"Smart Nutrition Scale",
+"offers":{
+"@type":"Offer",
+"price":"34.99",
+"priceCurrency":"USD"
+}
+
+}
+
+</script>
